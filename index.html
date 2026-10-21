@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ЭХО — хоррор для VR (WebXR)</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #000; overflow: hidden; font-family: system-ui, sans-serif; color: #ddd; }
+    canvas { display: block; }
+    #overlay {
+      position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: radial-gradient(ellipse at center, #0b0d12 0%, #000 80%); text-align: center; padding: 24px; z-index: 5;
+    }
+    #overlay h1 { font-size: 3rem; letter-spacing: .4em; margin: 0 0 .2em; color: #c33; font-weight: 300; }
+    #overlay p { max-width: 640px; line-height: 1.5; color: #9aa; margin: .4em 0; }
+    #overlay .warn { color: #b87; font-size: .9rem; }
+    #overlay label { margin: 14px 0; color: #bbb; cursor: pointer; }
+    #desk {
+      margin-top: 10px; padding: 12px 28px; background: transparent; color: #ccc; border: 1px solid #555;
+      border-radius: 4px; cursor: pointer; font-size: 1rem;
+    }
+    #desk:hover { border-color: #c33; color: #fff; }
+    #controls { font-size: .8rem; color: #667; margin-top: 18px; max-width: 640px; line-height: 1.6; }
+    #hud {
+      position: fixed; left: 16px; bottom: 16px; z-index: 4; font: 14px/1.4 monospace; color: #bcd;
+      background: rgba(0,0,0,.45); padding: 8px 12px; border-radius: 4px; white-space: pre; display: none;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="overlay">
+    <h1>ЭХО</h1>
+    <p>Заброшенная станция. Существо, которое не видит, а слышит. Тишина — твоё единственное оружие.</p>
+    <p class="warn">⚠ Игра содержит пугающие сцены, резкие звуки и тёмные сцены. Играйте в наушниках. Не рекомендуется людям с эпилепсией и при плохом самочувствии. Если появилась тошнота — снимите шлем.</p>
+    <label><input type="checkbox" id="mic"> Использовать микрофон (громкий звук в реальности тоже привлекает существо)</label>
+    <button id="desk">Играть на ПК (тест без шлема)</button>
+    <div id="controls">
+      <b>VR:</b> левый стик — идти · правый стик — поворот / телепорт · хват (grip) — взять / бросить · курок — включить фонарик / использовать · клик левого стика — плавное движение ⇄ телепорт · X — приглушить рацию · присядь по-настоящему, чтобы красться<br>
+      <b>ПК:</b> WASD — идти · Shift — красться · Ctrl/C — присесть · мышь — смотреть · E — взять/положить · ЛКМ — бросить · F — фонарик / использовать
+    </div>
+  </div>
+  <div id="hud"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
